@@ -24,6 +24,7 @@ describe('Smoke test', () => {
   });
 });
 
+//Test Component Builder
 describe('AppComponent with TCB', function () {
 
   it('should instantiate component',
@@ -34,6 +35,7 @@ describe('AppComponent with TCB', function () {
     });
   })));
 
+  //MARKUP TEST
   it('should have expected <h1> text',
     async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
 
@@ -48,27 +50,30 @@ describe('AppComponent with TCB', function () {
     });
 
   })));
+
 });
 
-describe ('Welcome', () => {
-        beforeEachProviders(() => [
-            AppComponent,
-        ]);
+//Without TCB (method test)
+    describe ('Welcome', () => {
+            beforeEachProviders(() => [
+                AppComponent,
+            ]);
 
-            it('should be called', () => {
-            let theDisplay = new AppComponent();
-            spyOn(theDisplay, 'doit');
-            theDisplay.doit();
-            expect(theDisplay.doit).toHaveBeenCalled();
-        });
+                it('should be called', () => {
+                let theDisplay = new AppComponent();
+                spyOn(theDisplay, 'doit').and.callThrough();   //needed for code coverage Wallaby
+                //spyOn(theDisplay, 'doit')
+                theDisplay.doit();
+                expect(theDisplay.doit).toHaveBeenCalled();
+            });
 
-         it('should welcome', () => {
-             let theDisplay = new AppComponent();
-             spyOn(theDisplay, 'doit').and.returnValue('Hello');
-             let result = theDisplay.doit();
-             expect(result).toEqual('Hello');
-        });
-
+             it('should welcome', () => {
+                 let theDisplay = new AppComponent();
+                 spyOn(theDisplay, 'doit').and.returnValue('Hello');
+                 let result = theDisplay.doit();
+                 console.log(result);
+                 expect(result).toEqual('Hello');
+            });
 
 });
 

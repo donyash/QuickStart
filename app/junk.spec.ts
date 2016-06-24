@@ -24,7 +24,8 @@ import { PromiseWrapper } from '@angular/core/src/facade/promise';
 
             it('should be called', () => {
             let theDisplay = new AppComponent();
-            spyOn(theDisplay, 'doit');
+            //spyOn(theDisplay, 'doit').and.callThrough();   //needed for code coverage Wallaby
+            spyOn(theDisplay, 'doit')
             theDisplay.doit();
             expect(theDisplay.doit).toHaveBeenCalled();
         });
@@ -35,7 +36,8 @@ import { PromiseWrapper } from '@angular/core/src/facade/promise';
              let result = theDisplay.doit();
              console.log(result);
              expect(result).toEqual('Hello');
-        });
+            });
+
 
 });
 

@@ -8,10 +8,24 @@
  @Injectable()
  export class ProductService  {
     
-   constructor(private _http: Http) { }
+   constructor() { }
 
    getProducts(): string {
-       return "Buy my product";
+       return "tools and stuff";
    }
 
-}
+ }
+
+
+
+ @Injectable()
+ export class CustomerService {
+     productService: ProductService;
+     constructor(productService: ProductService) {
+         this.productService = productService;
+     }
+     getCustomerDetails(): string {
+         let products = this.productService.getProducts();
+         return 'Customer purchased: ' + products;
+     }
+ }
